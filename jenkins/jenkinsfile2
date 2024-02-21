@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    tools { nodejs "nodejs"}
+    stages {
+        stage('Workspace Clean') {
+            steps {
+              cleanWs()
+            }
+        }
+        stage('git clone') {
+            steps {
+                sh """
+                   echo ${WORKSPACE}
+                   git clone 'https://github.com/leesanghoon94/myapp.git'
+                   """
+            }
+        }
+        stage('npm install') {
+            steps {
+                sh  """
+                    cd myapp/server
+                    """
+            }
+        }
+    }
+}
