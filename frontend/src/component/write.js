@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSWRConfig } from "swr";

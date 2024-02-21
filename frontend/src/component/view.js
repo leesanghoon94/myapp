@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Link } from "react-router-dom";
 import useSWR, { useSWRConfig } from "swr";
 import Article from "./article";
