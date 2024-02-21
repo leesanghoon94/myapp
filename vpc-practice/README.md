@@ -1,3 +1,3 @@
 vpc 생성하기
 
-![스크린샷 2024-02-15 오후 5.38.26](/Users/lee/Desktop/스크린샷 2024-02-15 오후 5.38.26.png)
+<img width="746" alt="vpc" src="https://github.com/leesanghoon94/my/assets/127801771/37c05d23-0369-41c8-a837-97d5ceee3672">
