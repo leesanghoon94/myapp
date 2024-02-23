@@ -1,0 +1,15 @@
+output "public-subnet" {
+    value = aws_subnet.my-public-subnet-a.id
+    description = "public subnet-a"
+  
+}
+
+output "private-app-subnet" {
+  value = aws_subnet.my-private-subnet-app-a.id
+  description = "private subnet-app-a"
+}
+
+output "vpc-id" {
+  value = aws_vpc.my-vpc.id
+  description = "vpc-id"
+}

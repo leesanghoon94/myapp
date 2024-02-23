@@ -9,7 +9,7 @@
 ```
 cd tf/
 tfi
-tfp -auto-approve
+tfp
 tfa -auto-approve
 ```
 
