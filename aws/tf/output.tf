@@ -13,3 +13,10 @@ output "vpc-id" {
   value = aws_vpc.my-vpc.id
   description = "vpc-id"
 }
+
+output "app" {
+  value = aws_instance.app.id
+}
+output "jenkins" {
+  value = aws_instance.jenkins.id
+}

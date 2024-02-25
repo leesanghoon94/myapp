@@ -1,0 +1,10 @@
+- name: copy build
+  hosts: app
+
+  tasks:
+    - name: deploy
+      shell:
+        cmd: |
+          sudo systemctl stop nginx
+          sudo cd my/frontend/
+          sudo cp -r build/* /usr/share/nginx/html/
