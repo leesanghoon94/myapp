@@ -1,0 +1,16 @@
+- name: copy build
+  hosts: app
+  become: true
+  tasks:
+    - name: kill npm
+      command: pkill -f 'npm start'
+      ignore_errors: true
+
+    - name: start npm
+      shell:
+        cmd: |
+          cd ~/my/server
+          . ~/.nvm/nvm.sh
+          nvm use 16
+          echo $(pwd)
+          nohup npm start &

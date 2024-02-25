@@ -1,10 +1,27 @@
 - name: copy build
   hosts: app
-
+  become: true
   tasks:
-    - name: deploy
+    - name: stop nginx
+      command: systemctl stop nginx
+
+    - name: remove html
+      file:
+        path: /usr/share/nginx/html
+        state: absent
+
+    - name: create html
+      file:
+        path: /usr/share/nginx/html
+        state: directory
+
+    - name: cp build
       shell:
         cmd: |
-          sudo systemctl stop nginx
-          sudo cd my/frontend/
-          sudo cp -r build/* /usr/share/nginx/html/
+          pwd
+          ls -l
+          cd /root/my/frontend/
+          cp -r build/* /usr/share/nginx/html
+
+    - name: start nginx
+      command: systemctl start nginx
