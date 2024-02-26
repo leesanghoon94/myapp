@@ -3,8 +3,8 @@
   remote_user: ec2-user
   become: true
   tasks:
-    - name: stop nginx
-      command: systemctl stop nginx
+    - name: install nginx
+      command: amazon-linux-extras install -y nginx1
 
     - name: remove html
       file:
@@ -21,7 +21,7 @@
         cmd: |
           pwd
           ls -l
-          cd /root/my/frontend/
+          cd /my/frontend
           cp -r build/* /usr/share/nginx/html
 
     - name: start nginx
