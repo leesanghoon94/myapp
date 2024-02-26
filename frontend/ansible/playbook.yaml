@@ -19,7 +19,7 @@
     - name: cp build
       shell:
         cmd: |
-          echo ${PWD}
+
           cd /my/frontend
           cp -r build/* /usr/share/nginx/html
 
