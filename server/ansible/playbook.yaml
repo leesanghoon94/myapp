@@ -17,7 +17,9 @@
         node -v
 
     - name: npm i
-      ansible.builtin.shell: npm install
+      ansible.builtin.shell: |
+        cd /home/ec2-user/server
+        npm install
 
     - name: kill npm
       command: pkill -f 'npm start'
