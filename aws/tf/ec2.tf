@@ -3,7 +3,7 @@ resource "aws_instance" "app" {
   instance_type = "t2.micro"
   subnet_id = var.private-subnet[0]
   security_groups = [aws_security_group.app.id]
-  # iam_instance_profile = "session-manager"
+  iam_instance_profile = "session-manager"
   key_name = local.key_pair_name
 
   tags = {

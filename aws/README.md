@@ -95,3 +95,5 @@ DROP USER 'root'@'localhost';
 grant all privileges on _._ to '계정명'@'%';
 
 flush privileges;
+
+ansible inventory key.pem chown -R jenkins:jenkins ./1ansible

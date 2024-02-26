@@ -1,14 +1,14 @@
 variable "vpc_id" {
   type = string
-  default = "vpc-0cf774caa0df40d9c"
+  default = "vpc-0aff28fe1b97da9de"
 }
 
 variable "public-subnet" {
   type = list(string)
-  default = [ "subnet-06b0fdb9ac3cef045" ]
+  default = [ "subnet-01e6e172e18669f8c" ]
 }
 
 variable "private-subnet" {
   type = list(string)
-  default = [ "subnet-0cc17070f1ff3b558" ]
+  default = [ "subnet-000e1982db8d4479f" ]
 }
