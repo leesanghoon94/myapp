@@ -12,13 +12,17 @@
           nvm install 16
           node -v
 
+    # - name: copy
+    # ansible.builtin.copy:
+    #   src: /var/lib/jenkins/workspace/backend/my/server
+    #   dest: /home/ec2-user/
+    #   owner: ec2-user
+    #   group: ec2-user
+    #   # mode: 0755
+    #   ignore_errors: true
     - name: copy
-      ansible.builtin.copy:
-        src: /var/lib/jenkins/workspace/backend/my/server
-        dest: /home/ec2-user/
-        owner: ec2-user
-        group: ec2-user
-        # mode: 0755
+      ansible.builtin.shell:
+        cmd: "cp -r /var/lib/jenkins/workspace/backend/my/server/ /home/ec2-user"
         ignore_errors: true
 
     - name: kill npm
