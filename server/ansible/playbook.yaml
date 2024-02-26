@@ -2,6 +2,14 @@
   hosts: app
   become: true
   tasks:
+    - name: install node
+      shell:
+        cmd: |
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+          . ~/.nvm/nvm.sh
+          nvm install 16
+          node -v
+
     - name: kill npm
       command: pkill -f 'npm start'
       ignore_errors: true
@@ -9,4 +17,5 @@
     - name: start npm
       shell:
         cmd: |
+          npm install
           npm start
