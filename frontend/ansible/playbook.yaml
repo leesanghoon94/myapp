@@ -20,8 +20,8 @@
     #     cmd: |
     #       cp -r build/* /usr/share/nginx/html
     - name: copy html
-      copy:
-        src: var/lib/jenkins/workspace/ASDF/my/frontend/build/
+      ansible.builtin.copy:
+        src: /var/lib/jenkins/workspace/ASDF/my/frontend/build/
         dest: /usr/share/nginx/html
         owner: ec2-user
         group: ec2-user
