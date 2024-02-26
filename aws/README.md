@@ -30,7 +30,7 @@ jenkins app
                 systemctl start jenkins
                 ps -ef | grep jenkins
 
-networksetup -listallhardwareports
+<!-- networksetup -listallhardwareports
 
 Hardware Port: Thunderbolt Bridge
 Device: bridge0
@@ -56,7 +56,7 @@ Hardware Port: Thunderbolt 4
 Device: en4
 Ethernet Address: 82:cb:2d:04:a4:04
 
-# VLAN Configurations
+# VLAN Configurations -->
 
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 agnoster
