@@ -11,7 +11,10 @@
         group: ec2-user
         mode: 644
     - name: node
-      ansible.builtin.shell: . ~/.nvm/nvm.sh
+      ansible.builtin.shell: |
+        . ~/.nvm/nvm.sh
+        nvm install 16
+        node -v
 
     - name: npm i
       ansible.builtin.shell: npm install
