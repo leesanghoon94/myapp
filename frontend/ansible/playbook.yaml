@@ -15,10 +15,7 @@
       file:
         path: /usr/share/nginx/html
         state: directory
-    # - name: copy build
-    #   shell:
-    #     cmd: |
-    #       cp -r build/* /usr/share/nginx/html
+
     - name: copy html
       ansible.builtin.copy:
         src: /var/lib/jenkins/workspace/ASDF/my/frontend/build/

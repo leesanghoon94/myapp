@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    tools {nodejs "nodejs"}
+    stages {
+        stage ('clean') {
+            steps {
+                cleanWs()
+            }
+        }
+        stage ('git clone') {
+            steps {
+                sh  """
+                    git clone https://github.com/leesanghoon94/my.git
+                    """
+            }
+        }
+        
+        stage ('npm') {
+            steps {
+                sh  """
+                    cd my/frontend
+                    npm install
+                    npm run build
+                    """
+            }
+        }
+        
+        stage ('ansible ssh connetct') {
+            steps {
+                sh  """
+                    ls -al
+                    cd my/frontend/ansible
+                    
+                    ansible -i inventory -m ping app 
+                    ansible-playbook -i inventory playbook.yaml
+    
+                    """
+            }
+        }
+        stage ('echo') {
+            steps {
+                sh  """
+                    echo finish
+                    """
+            }
+        }
+    }
+}

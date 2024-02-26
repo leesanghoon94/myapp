@@ -11,14 +11,22 @@ pipeline {
             steps {
                 sh """
                    echo ${WORKSPACE}
-                   git clone 'https://github.com/leesanghoon94/myapp.git'
+                   git clone 'https://github.com/leesanghoon94/my.git'
                    """
             }
         }
         stage('npm install') {
             steps {
                 sh  """
-                    cd myapp/server
+                    cd my/server
+                    npm install
+                    """
+            }
+        }
+        stage('deploy') {
+            steps {
+                sh  """
+                    ansible-playbook -i inventory playbook.yaml
                     """
             }
         }

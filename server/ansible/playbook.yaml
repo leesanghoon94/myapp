@@ -9,8 +9,4 @@
     - name: start npm
       shell:
         cmd: |
-          cd ~/my/server
-          . ~/.nvm/nvm.sh
-          nvm use 16
-          echo $(pwd)
-          nohup npm start &
+          npm start

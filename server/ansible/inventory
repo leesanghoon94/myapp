@@ -1,2 +1,7 @@
+
+[app:vars]
+ansible_ssh_private_key_file=/usr/local/share/asdf.pem
+ansible_user=ec2-user
+
 [app]
-10.1.1.152
+10.1.1.144
