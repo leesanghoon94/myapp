@@ -19,6 +19,7 @@
     - name: npm i
       ansible.builtin.shell: |
         cd /home/ec2-user/server
+        rm -rf node_modules
         npm install
 
     - name: kill npm
