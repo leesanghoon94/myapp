@@ -16,12 +16,13 @@
         path: /usr/share/nginx/html
         state: directory
 
-    - name: cp build
-      shell:
-        cmd: |
-
-          cd /my/frontend
-          cp -r build/* /usr/share/nginx/html
+    - name: copy html
+      ansible.builtin.copy:
+        src: /var/lib/jenkins/workspace/my/frontend/build
+        dest: /usr/share/nginx/html
+        owner: ec2-user
+        group: ec2-user
+        mode: 0755
 
     - name: start nginx
       command: systemctl start nginx
