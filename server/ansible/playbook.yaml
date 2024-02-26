@@ -11,6 +11,9 @@
           [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
           nvm install 16
           node -v
+    - name: rm
+      command: rm -rf /home/ec2-user/node_modules
+
     - name: copy
       ansible.builtin.copy:
         src: /var/lib/jenkins/workspace/backend/my/server/
