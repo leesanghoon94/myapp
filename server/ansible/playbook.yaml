@@ -11,16 +11,14 @@
           [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
           nvm install 16
           node -v
-    - name: rm
-      command: rm -rf /home/ec2-user/node_modules
 
     - name: copy
       ansible.builtin.copy:
         src: /var/lib/jenkins/workspace/backend/my/server/
         dest: /home/ec2-user
-        owner: ec2-user
-        group: ec2-user
-        mode: 0755
+        # owner: ec2-user
+        # group: ec2-user
+        # mode: 0755
 
     - name: kill npm
       command: pkill -f 'npm start'
@@ -29,7 +27,5 @@
     - name: start npm
       shell:
         cmd: |
-          . ~/.nvm/nvm.sh
           cd /home/ec2-user
-          npm install
           npm start
