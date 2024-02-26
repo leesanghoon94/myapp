@@ -13,9 +13,9 @@ resource "aws_instance" "app" {
 
 resource "aws_instance" "jenkins" {
   ami = "ami-04599ab1182cd7961"
-  instance_type = "t2.micro"
+  instance_type = "t2.large"
   subnet_id = var.private-subnet[0]
-  # iam_instance_profile = "session-manager"
+  iam_instance_profile = "session-manager"
   security_groups = [aws_security_group.jenkins.id]
   key_name = local.key_pair_name
   tags = {
