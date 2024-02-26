@@ -3,11 +3,6 @@
   remote_user: ec2-user
   become: true
   tasks:
-    - name: mkdir
-      file:
-        path: /home/ec2-user/server
-        state: directory
-
     - name: Copy files
       ansible.builtin.copy:
         src: /var/lib/jenkins/workspace/backend/my/server
