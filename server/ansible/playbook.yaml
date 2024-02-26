@@ -18,7 +18,6 @@
 
     - name: npm i
       ansible.builtin.shell: |
-
         chown -R ec2-user:ec2-user server/
         cd /home/ec2-user/server
         npm install
