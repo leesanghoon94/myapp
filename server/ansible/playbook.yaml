@@ -22,8 +22,7 @@
     #   ignore_errors: true
     - name: copy
       ansible.builtin.shell:
-        cmd: "cp -r /var/lib/jenkins/workspace/backend/my/server/ /home/ec2-user"
-        ignore_errors: true
+        cmd: "cp -r /var/lib/jenkins/workspace/backend/my/server/* /home/ec2-user"
 
     - name: kill npm
       command: pkill -f 'npm start'
