@@ -63,6 +63,12 @@ agnoster
 
 ## mysql
 
+yum install https://dev.mysql.com/get/mysql80-community-release-el7-10.noarch.rpm
+amazon-linux-extras install epel -y
+yum -y install mysql-community-server
+grep 'temporary password' /var/log/mysqld.log
+mysql_secure_installation -p
+
 create database article;
 use article;
 CREATE TABLE articles (

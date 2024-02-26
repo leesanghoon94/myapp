@@ -11,6 +11,9 @@
         group: ec2-user
         mode: 644
 
+    - name: npm i
+      ansible.builtin.shell: npm install
+
     - name: kill npm
       command: pkill -f 'npm start'
       ignore_errors: true

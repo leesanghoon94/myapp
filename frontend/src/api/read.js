@@ -1,6 +1,6 @@
 export function readAll() {
   return () =>
-    fetch(`http://localhost:3333/api/article/`)
+    fetch(`http://10.1.1.144:3333/api/article/`)
       .then((res) => res.json())
       .then((arr) => arr.reverse());
 }
