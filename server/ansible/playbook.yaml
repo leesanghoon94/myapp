@@ -10,11 +10,11 @@
 
     - name: Copy files
       ansible.builtin.copy:
-        src: /var/lib/jenkins/workspace/backend/my/server/
-        dest: /home/ec2-user/server/
+        src: /var/lib/jenkins/workspace/backend/my/server
+        dest: /home/ec2-user/
         owner: ec2-user
         group: ec2-user
-        # mode: 0755
+        mode: 644
 
     - name: kill npm
       command: pkill -f 'npm start'
