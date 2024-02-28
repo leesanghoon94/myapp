@@ -8,34 +8,11 @@
         src: /var/lib/jenkins/workspace/backend/my/server
         dest: /home/ec2-user/
 
-    # - name: Install git and zsh
-    #   ansible.builtin.yum:
-    #     name:
-    #       - git
-    #       - zsh
-    #     state: present
-
-    # - name: Install Oh My Zsh
-    #   ansible.builtin.shell: |
-    #     zsh
-    #     "zsh -c '$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)'"
-
-    # - name: Source zshrc
-    #   ansible.builtin.shell: "source ~/.zshrc"
-
     - name: node install
       ansible.builtin.shell: |
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
         . ~/.nvm/nvm.sh
         nvm install 16
-
-    - name: npm install
-      ansible.builtin.shell: |
         cd /home/ec2-user/server
         npm install
-
-    - name: start npm
-      shell:
-        cmd: |
-          cd /home/ec2-user
-          npm start
+        npm start
