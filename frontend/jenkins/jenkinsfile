@@ -28,6 +28,7 @@ pipeline {
         stage ('deploy ansible') {
             steps {
                 sh  """
+                    chown jenkins:jenkins /home/ec2-user/asdf.pem
                     cd my/frontend/ansible
                     ansible-playbook -i inventory playbook.yaml
     
