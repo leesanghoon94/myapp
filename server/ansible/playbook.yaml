@@ -16,11 +16,9 @@
         state: present
 
     - name: Install Oh My Zsh
-      become: true
-      ansible.builtin.shell: "sh -c '$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)'"
+      ansible.builtin.shell: "zsh -c '$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)'"
 
     - name: Source zshrc
-      become: true
       ansible.builtin.shell: "source ~/.zshrc"
 
     - name: node install
