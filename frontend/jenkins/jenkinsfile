@@ -25,13 +25,10 @@ pipeline {
             }
         }
         
-        stage ('ansible ssh connetct') {
+        stage ('deploy ansible') {
             steps {
                 sh  """
-                    ls -al
                     cd my/frontend/ansible
-                    
-                    ansible -i inventory -m ping app 
                     ansible-playbook -i inventory playbook.yaml
     
                     """

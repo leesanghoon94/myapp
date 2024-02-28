@@ -7,24 +7,21 @@
       ansible.builtin.copy:
         src: /var/lib/jenkins/workspace/backend/my/server
         dest: /home/ec2-user/
-        owner: ec2-user
-        group: ec2-user
-        mode: 644
-    - name: node
+
+    - name: node install
       ansible.builtin.shell: |
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
         . ~/.nvm/nvm.sh
         nvm install 16
-        node -v
 
-    - name: npm i
+    - name: npm install
       ansible.builtin.shell: |
         cd /home/ec2-user/server
-        rm -rf node_modules
         npm install
 
-    - name: kill npm
-      command: pkill -f 'npm start'
-      ignore_errors: true
+    # - name: kill npm
+    #   command: pkill -f 'npm start'
+    #   ignore_errors: true
 
     - name: start npm
       shell:

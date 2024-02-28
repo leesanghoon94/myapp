@@ -15,17 +15,11 @@ pipeline {
                    """
             }
         }
-        stage('npm install') {
-            steps {
-                sh  """
-                    cd my/server
-                    npm install
-                    """
-            }
-        }
+        
         stage('deploy') {
             steps {
                 sh  """
+                    cd my/server/asible
                     ansible-playbook -i inventory playbook.yaml
                     """
             }
