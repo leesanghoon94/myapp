@@ -1,12 +1,20 @@
 - name: backend
   hosts: app
-
   become: true
+
   tasks:
     - name: Copy files
       ansible.builtin.copy:
         src: /var/lib/jenkins/workspace/backend/my/server
         dest: /home/ec2-user/
+
+    - name: yum install
+      shell:
+        cmd: |
+          yum install -y git
+          yum install -y zsh
+          sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+          source ~/.zshrc
 
     - name: node install
       ansible.builtin.shell: |
@@ -18,10 +26,6 @@
       ansible.builtin.shell: |
         cd /home/ec2-user/server
         npm install
-
-    # - name: kill npm
-    #   command: pkill -f 'npm start'
-    #   ignore_errors: true
 
     - name: start npm
       shell:
