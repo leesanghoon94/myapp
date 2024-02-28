@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh  """
                     echo ${WORKSPACE}
-                    cd my/server/asible
+                    cd my/server/ansible
                     ansible-playbook -i inventory playbook.yaml
                     """
             }
