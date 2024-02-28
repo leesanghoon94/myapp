@@ -8,13 +8,20 @@
         src: /var/lib/jenkins/workspace/backend/my/server
         dest: /home/ec2-user/
 
-    - name: yum install
-      shell:
-        cmd: |
-          yum install -y git
-          yum install -y zsh
-          sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-          source ~/.zshrc
+    - name: Install git and zsh
+      ansible.builtin.yum:
+        name:
+          - git
+          - zsh
+        state: present
+
+    - name: Install Oh My Zsh
+      become: true
+      ansible.builtin.shell: "sh -c '$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)'"
+
+    - name: Source zshrc
+      become: true
+      ansible.builtin.shell: "source ~/.zshrc"
 
     - name: node install
       ansible.builtin.shell: |
