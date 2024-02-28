@@ -28,10 +28,8 @@ pipeline {
         stage ('deploy ansible') {
             steps {
                 sh  """
-                    
                     cd my/frontend/ansible
                     ansible-playbook -i inventory playbook.yaml
-    
                     """
             }
         }

@@ -17,7 +17,7 @@
         dest: /usr/share/nginx/html
         owner: ec2-user
         group: ec2-user
-        mode: 600
+        mode: 666
 
     - name: start nginx
       command: systemctl start nginx
