@@ -2,7 +2,7 @@
 
 <img width="727" alt="bastion" src="https://github.com/leesanghoon94/my/assets/127801771/31f871bc-ecb9-42e1-a7c8-9a3a0cf8dd64">
 
-## bastion host에서 private ec2로 접속
+## prerequisite
 
 ```
 cd tf/
@@ -10,6 +10,8 @@ tfi
 tfp
 tfa -auto-approve
 ```
+
+## bastion host에서 private ec2로 접속
 
 완료후  
 터미널로 접속  

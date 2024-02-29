@@ -4,3 +4,15 @@
 
 Private Subnet 접근 가능:  
 VPN을 통해 연결된 클라이언트는 VPN 서버와 같은 네트워크에 속한 것처럼 동작합니다. 이로써 클라이언트는 private subnet에 있는 EC2 인스턴스에 접근할 수 있습니다.
+
+## prerequisite
+
+vpc폴더에서 vpc 생성  
+cd vpc/tf/  
+tfa -auto-approve
+
+## cleanup
+
+리소스 삭제해준다  
+cd tf/  
+tfd -auto-approve
