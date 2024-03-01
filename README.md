@@ -1,6 +1,6 @@
 # my
 
-## 변경
+## 변경 변경
 
                 sudo -i
                 yum update
