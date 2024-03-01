@@ -2,6 +2,15 @@ pipeline {
     agent any
     tools { nodejs "nodejs"}
     stages {
+        
+        stage('slack start') {
+            steps {
+             slackSend color: "#439FE0", message: "Build Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+            
+            }
+        }
+        
+        
         stage('Workspace Clean') {
             steps {
               cleanWs()
