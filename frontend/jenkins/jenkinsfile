@@ -4,11 +4,11 @@ pipeline {
     stages {
 
         stage('trigger') {
-            // steps {
-            //     git brach: "main",
-            //     credentialsId: 'github_access_token',
-            //     url: "https://github.com/leesanghoon94/my.git"
-            // }
+            steps {
+                git brach: "main",
+                credentialsId: 'github-token',
+                url: "https://github.com/leesanghoon94/my.git"
+            }
         }
         
         stage('slack start') {
