@@ -1,105 +1,38 @@
-# 소규모서비스구축
+# AWS 소규모서비스구축
 
-<img width="851" alt="소규모" src="https://github.com/leesanghoon94/my/assets/127801771/f744f75a-7c70-4a9c-b17d-084e7bf25b29">
+### 아키텍처
 
-간단한 WAS
+<img width="626" alt="스크린샷 2024-03-01 오후 7 11 39" src="https://github.com/leesanghoon94/my/assets/127801771/52f21cbf-7ee9-4a64-8a60-10e1e71dc75f">
 
-jenkins app
+### prerequisite
 
-                sudo -i
-                yum update
-                wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-                rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
-                yum install -y jenkins
+---
 
-                잘설치되었는지
-                rpm -qa | grep jenkins
+- 테라폼을 활용하여 인프라를 생성합니다. (AWS VPC, EC2, RDS, Security Groups)
 
-                yum install -y git
+```zsh
+cd tf/
+terraform init
+terraform plan
+terraform apply
+```
 
-                amazon-linux-extras install -y ansible2
+### 개요
 
-                curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-                . ~/.nvm/nvm.sh
-                nvm install 16
+---
 
-                yum install -y java
+이 프로젝트는 Node.js 기반의 웹 어플리케이션을 AWS 환경에 배포하고 있습니다.
 
-                jenkins java가 없으면 실행이 안됨
+1.  프론트엔드 :
+    React와 Nginx를 사용한 프론트엔드 배포.
+    Private 서브넷에 위치하여 외부에서 직접 접근이 불가능하도록 보안을 강화합니다.
+1.  백엔드 :
+    rds와 노드 익스프레스 서버를 통해 백엔드 구동.
 
-                systemctl start jenkins
-                ps -ef | grep jenkins
+### 결과
 
-<!-- networksetup -listallhardwareports
+---
 
-Hardware Port: Thunderbolt Bridge
-Device: bridge0
-Ethernet Address: 82:cb:2d:04:a4:01
-
-Hardware Port: Wi-Fi
-Device: en0
-Ethernet Address: 8c:85:90:c5:b5:eb
-
-Hardware Port: Thunderbolt 1
-Device: en1
-Ethernet Address: 82:cb:2d:04:a4:01
-
-Hardware Port: Thunderbolt 2
-Device: en2
-Ethernet Address: 82:cb:2d:04:a4:00
-
-Hardware Port: Thunderbolt 3
-Device: en3
-Ethernet Address: 82:cb:2d:04:a4:05
-
-Hardware Port: Thunderbolt 4
-Device: en4
-Ethernet Address: 82:cb:2d:04:a4:04
-
-# VLAN Configurations -->
-
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-agnoster
-
-## mysql
-
-yum install https://dev.mysql.com/get/mysql80-community-release-el7-10.noarch.rpm
-amazon-linux-extras install epel -y
-yum -y install mysql-community-server
-grep 'temporary password' /var/log/mysqld.log
-mysql_secure_installation -p
-
-create database article;
-use article;
-CREATE TABLE articles (
-\_id INT AUTO_INCREMENT PRIMARY KEY,
-title VARCHAR(64),
-body VARCHAR(64),
-updatetime TIMESTAMP
-);
-
-INSERT INTO articles (title, body, updatetime) VALUES
-('제목1', '내용1', CURRENT_TIMESTAMP),
-('제목2', '내용2', CURRENT_TIMESTAMP),
-('제목3', '내용3', CURRENT_TIMESTAMP);
-
-alter table articles change column id \_id int;
-
-show variables like 'validate_password%';
-set global validate_password.policy=low;
-
-여기서 validate_password_length는 최소한의 패스워드 길이를 설정하고, validate_password_policy는 패스워드 정책을 설정합니다. validate_password_policy의 값은 다음과 같습니다:
-
-0: 패스워드 정책 비활성화
-1: LOW
-2: MEDIUM
-3: STRONG
-crate user
-create user 'root'@'%' identified by '12345678';
-DROP USER 'root'@'localhost';
-
-grant all privileges on _._ to '계정명'@'%';
-
-flush privileges;
-
-ansible inventory key.pem chown -R jenkins:jenkins ./1ansible
+- 테라폼을 활용하여 재사용성과 휴먼에러를 없애고 동일한 개발 환경 구축
+- ELB를 사용하여 트래픽을 분산하고, Route 53과 ACM를 활용하여 SSL 인증서를 관리하여 보안성을 강화합니다.
+- RDS를 활용하여 데이터베이스 관리의 편의성과 성능을 동시에 보장합니다.

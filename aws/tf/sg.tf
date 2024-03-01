@@ -1,5 +1,5 @@
 resource "aws_security_group" "app" {
-  vpc_id = var.vpc_id
+  vpc_id = aws_vpc.my-vpc.id
   name = "app-sg"
 
   ingress {
@@ -22,7 +22,7 @@ resource "aws_security_group" "app" {
 }
 
 resource "aws_security_group" "jenkins" {
-  vpc_id = var.vpc_id
+  vpc_id = aws_vpc.my-vpc.id
   name = "jenkins-sg"
 
   ingress {
