@@ -2,6 +2,11 @@ pipeline {
     agent any
     tools {nodejs "nodejs"}
     stages {
+        stage('slack start') {
+            steps {
+                slackSend "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+            }
+        }
         stage ('clean') {
             steps {
                 cleanWs()
@@ -33,11 +38,9 @@ pipeline {
                     """
             }
         }
-        stage ('echo') {
+        stage ('slack finished') {
             steps {
-                sh  """
-                    echo finish
-                    """
+                slackSend "Build finished - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
             }
         }
     }

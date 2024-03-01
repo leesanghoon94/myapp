@@ -24,34 +24,6 @@
                 systemctl start jenkins
                 ps -ef | grep jenkins
 
-<!-- networksetup -listallhardwareports
-
-Hardware Port: Thunderbolt Bridge
-Device: bridge0
-Ethernet Address: 82:cb:2d:04:a4:01
-
-Hardware Port: Wi-Fi
-Device: en0
-Ethernet Address: 8c:85:90:c5:b5:eb
-
-Hardware Port: Thunderbolt 1
-Device: en1
-Ethernet Address: 82:cb:2d:04:a4:01
-
-Hardware Port: Thunderbolt 2
-Device: en2
-Ethernet Address: 82:cb:2d:04:a4:00
-
-Hardware Port: Thunderbolt 3
-Device: en3
-Ethernet Address: 82:cb:2d:04:a4:05
-
-Hardware Port: Thunderbolt 4
-Device: en4
-Ethernet Address: 82:cb:2d:04:a4:04
-
-# VLAN Configurations -->
-
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 agnoster
 
