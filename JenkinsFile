@@ -1,42 +1,48 @@
 pipeline {
     agent any
-    tools { nodejs "nodejs"}
+    tools {nodejs "nodejs"}
     stages {
+
         
         stage('slack start') {
             steps {
              slackSend (color: "#439FE0", message: "Build Started!!: ${env.JOB_NAME} ${env.BUILD_NUMBER}")
-            
             }
         }
-        
-        stage('Workspace Clean') {
+        stage ('clean') {
             steps {
-              cleanWs()
+                cleanWs()
             }
         }
-        stage('git clone') {
-            steps {
-                sh """
-                   echo ${WORKSPACE}
-                   git clone 'https://github.com/leesanghoon94/my.git'
-                   """
-            }
-        }
-        
-        stage('deploy') {
+        stage ('git clone') {
             steps {
                 sh  """
-                    echo ${WORKSPACE}
-                    cd my/server/ansible
-                    ansible-playbook -i inventory playbook.yaml
+                    git clone https://github.com/leesanghoon94/my.git
                     """
             }
         }
         
-        stage('end'){
+        stage ('npm') {
             steps {
-                slackSend(message:"end")
+                sh  """
+                    cd my/frontend
+                    npm install
+                    npm run build
+                    """
+            }
+        }
+        
+        stage ('deploy ansible') {
+            steps {
+                sh  """
+                    cd my/frontend/ansible
+                    ansible-playbook -i inventory playbook.yaml
+                    """
+            }
+        }
+        stage ('end') {
+            steps {
+                slackSend ("Build finished - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
             }
         }
     }

@@ -1,12 +1,12 @@
 - name: copy build
   hosts: app
-
   become: true
+
   tasks:
     - name: Tell the hots about our servers it might want to ssh to
-      ansible.builtin.Known_hosts:
-        path: ~/.ssh/known_hosts
+      ansible.builtin.known_hosts:
         name: 10.1.1.150
+        key: 10.1.1.150 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDiVX6MKuHWIZpFEMPVROlw+lJHm7/KbOmGrM3e2ybHbieZrvPVrgLWcB+fuumxQa5BEOUljMo9d3BX4bM7pcCM=
 
     - name: install nginx
       command: amazon-linux-extras install -y nginx1

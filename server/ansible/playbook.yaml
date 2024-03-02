@@ -4,7 +4,7 @@
 
   tasks:
     - name: Tell the hots about our servers it might want to ssh to
-      ansible.builtin.Known_hosts:
+      ansible.builtin.known_hosts:
         path: ~/.ssh/known_hosts
         name: 10.1.1.150
 
