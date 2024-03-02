@@ -40,7 +40,7 @@ pipeline {
                     """
             }
         }
-        stage ('slack finished') {
+        stage ('end') {
             steps {
                 slackSend ("Build finished - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
             }

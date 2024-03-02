@@ -10,7 +10,6 @@ pipeline {
             }
         }
         
-        
         stage('Workspace Clean') {
             steps {
               cleanWs()
@@ -32,6 +31,12 @@ pipeline {
                     cd my/server/ansible
                     ansible-playbook -i inventory playbook.yaml
                     """
+            }
+        }
+        
+        stage('end'){
+            steps {
+                slackSend(message:"end")
             }
         }
     }
