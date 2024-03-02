@@ -3,6 +3,11 @@
 
   become: true
   tasks:
+    - name: Tell the hots about our servers it might want to ssh to
+      ansible.builtin.Known_hosts:
+        path: ~/.ssh/known_hosts
+        name: 10.1.1.150
+
     - name: install nginx
       command: amazon-linux-extras install -y nginx1
 
@@ -17,7 +22,7 @@
         dest: /usr/share/nginx/html
         owner: ec2-user
         group: ec2-user
-        mode: 666
+        mode: 600
 
     - name: start nginx
       command: systemctl start nginx
