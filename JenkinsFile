@@ -42,7 +42,7 @@ pipeline {
         }
         stage ('end') {
             steps {
-                slackSend ("Build finished - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
+                slackSend (message:"Build finished - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
             }
         }
     }
