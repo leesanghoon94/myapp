@@ -3,17 +3,10 @@ pipeline {
     tools {nodejs "nodejs"}
     stages {
 
-        stage('trigger') {
-            steps {
-                git brach: "main",
-                credentialsId: 'github-token',
-                url: "https://github.com/leesanghoon94/my.git"
-            }
-        }
         
         stage('slack start') {
             steps {
-             slackSend color: "#439FE0", message: "Build Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+             slackSend (color: "#439FE0", message: "Build Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}")
             }
         }
         stage ('clean') {
@@ -49,7 +42,7 @@ pipeline {
         }
         stage ('slack finished') {
             steps {
-                slackSend "Build finished - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                slackSend ("Build finished - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
             }
         }
     }

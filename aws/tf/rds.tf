@@ -9,7 +9,7 @@ resource "aws_db_instance" "mydb" {
   parameter_group_name = "rds-pg"
   skip_final_snapshot = true
   db_subnet_group_name = aws_db_subnet_group.defualt.id
-  vpc_security_group_ids = [ "" ]
+  vpc_security_group_ids =  [aws_security_group.app.id ]
   delete_automated_backups = true
 }
 
