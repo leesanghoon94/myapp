@@ -1,13 +1,8 @@
 - name: backend
   hosts: app
-  remote_user: ec2-user
   become: true
 
   tasks:
-    # - name: Tell the hots about our servers it might want to ssh to
-    #   ansible.builtin.known_hosts:
-    #     name: 10.1.1.133
-
     - name: Copy files
       ansible.builtin.copy:
         src: /var/lib/jenkins/workspace/backend/my/server
