@@ -23,6 +23,21 @@ resource "aws_instance" "jenkins" {
   }
 }
 
+resource "aws_instance" "openvpn" {
+  ami = "ami-0ba7b69b8b03f0bf1"
+  instance_type = "t2.micro"
+  subnet_id = aws_subnet.my-public-subnet-a.id
+  security_groups = [ aws_security_group.openvpn.id ]
+  key_name = local.key_pair_name
+  
+  associate_public_ip_address = true
+  
+  
+  tags = {
+    "Name" = "openvpn"
+  }
+}
+
 locals {
   key_pair_name = "asdf"
 }
