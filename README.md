@@ -33,6 +33,15 @@
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 agnoster
 
+npm i -g ngrok
+
+generic-webhook-trigger
+var expression
+user $.pusher.name
+optional filter
+
+^((?!build)) $user
+
 ## mysql
 
 yum install https://dev.mysql.com/get/mysql80-community-release-el7-10.noarch.rpm

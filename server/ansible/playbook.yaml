@@ -3,10 +3,9 @@
   become: true
 
   tasks:
-    - name: Tell the hots about our servers it might want to ssh to
-      ansible.builtin.known_hosts:
-        path: ~/.ssh/known_hosts
-        name: 10.1.1.150
+    # - name: Tell the hots about our servers it might want to ssh to
+    #   ansible.builtin.known_hosts:
+    #     name: 10.1.1.133
 
     - name: Copy files
       ansible.builtin.copy:
