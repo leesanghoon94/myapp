@@ -1,6 +1,6 @@
 - name: copy build
   hosts: app
-  become: true
+  remote_user: ec2-user
 
   tasks:
     # - name: Tell the hots about our servers it might want to ssh to
