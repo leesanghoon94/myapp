@@ -1,12 +1,9 @@
 - name: copy build
   hosts: app
-  remote_user: ec2-user
+  become: true
+  become_user: root
 
   tasks:
-    # - name: Tell the hots about our servers it might want to ssh to
-    #   ansible.builtin.known_hosts:
-    #     name: 10.1.1.133
-
     - name: install nginx
       command: amazon-linux-extras install -y nginx1
 
