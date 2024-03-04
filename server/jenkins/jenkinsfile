@@ -1,14 +1,12 @@
 pipeline {
     agent any
     tools { nodejs "nodejs"}
-    triggers {
-        githubPush()
-    }
+    
     stages {
         
         stage('slack start') {
             steps {
-             slackSend (color: "#439FE0", message: "Build Started!!: ${env.JOB_NAME} ${env.BUILD_NUMBER}")
+             slackSend (color: "#439FE0", message: "Build Started!!! : ${env.JOB_NAME} ${env.BUILD_NUMBER}")
             
             }
         }
@@ -21,7 +19,6 @@ pipeline {
         stage('git clone') {
             steps {
                 sh """
-                   echo ${WORKSPACE}
                    git clone 'https://github.com/leesanghoon94/my.git'
                    """
             }
@@ -30,7 +27,6 @@ pipeline {
         stage('deploy') {
             steps {
                 sh  """
-                    echo ${WORKSPACE}
                     cd my/server/ansible
                     ansible-playbook -i inventory playbook.yaml
                     """

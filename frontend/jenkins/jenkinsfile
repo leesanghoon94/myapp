@@ -1,12 +1,14 @@
 pipeline {
     agent any
     tools {nodejs "nodejs"}
-    triggers {
-        githubPush()
-    }
+    
     
     stages {
-
+        stage('git check') {
+            steps {
+                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/leesanghoon94/my'
+            }
+        }
         
         stage('slack start') {
             steps {
