@@ -92,7 +92,7 @@ resource "aws_autoscaling_group" "asg" {
     version = "$Latest"
     
   }
-  vpc_zone_identifier = [module.vpc.public_subnets[0], module.vpc.public_subnets[1]]
+  vpc_zone_identifier = [module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
   health_check_grace_period = 10
   health_check_type = "ELB"
 
