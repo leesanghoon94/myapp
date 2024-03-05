@@ -52,8 +52,9 @@ mysql_secure_installation -p
 
 create database article;
 use article;
-CREATE TABLE articles (
-\_id INT AUTO_INCREMENT PRIMARY KEY,
+
+```CREATE TABLE articles (
+_id INT AUTO_INCREMENT PRIMARY KEY,
 title VARCHAR(64),
 body VARCHAR(64),
 updatetime TIMESTAMP
@@ -84,3 +85,4 @@ grant all privileges on _._ to '계정명'@'%';
 flush privileges;
 
 ansible inventory key.pem chown -R jenkins:jenkins ./1ansible
+```
