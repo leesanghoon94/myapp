@@ -137,3 +137,15 @@ resource "aws_autoscaling_policy" "scale_up" {
 ```
 
 이 정책은 Auto Scaling 그룹의 EC2 인스턴스가 2분의 2회 연속 평가 기간 동안 CPU 사용률이 10% 미만이면 Auto Scaling 그룹에서 멤버를 삭제하고, 10%를 초과하면 자동으로 확장하는 대상 추적 크기 조정 정책이다.
+
+---
+
+## 부하테스트
+
+```console
+amazon-linux-extra install -y epel
+sudo yum install -y stress
+stress -c 1
+```
+
+stress를 사용하여 CPU에 대한 부하 테스트를 실행합니다. -c 1 플래그는 1개의 CPU 코어에 대한 부하를 생성하도록 지정합니다
