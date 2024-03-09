@@ -20,3 +20,70 @@ aws iam attach-role-policy --role-name AWSCloud9SSMAccessRole --policy-arn arn:a
 aws iam create-instance-profile --instance-profile-name AWSCloud9SSMInstanceProfile --path /cloud9/
 aws iam add-role-to-instance-profile --instance-profile-name AWSCloud9SSMInstanceProfile --role-name AWSCloud9SSMAccessRole
 ```
+
+- 5분 메이븐
+  - https
+
+---
+
+ecs cluster
+cluster {
+cluster name
+default namespace
+
+}
+
+infra {
+amazon ec2 instance
+auto scaling group
+provisioning model {
+on-demand
+os amazon linux2 (kernel 5.10)
+instance type = c5.large
+desired capacity = {
+minimum = 0
+maximum = 2
+}
+ssh key pair
+root ebs volume size = 30
+}
+monitoring {
+use container insights = disable
+}
+}
+
+---
+
+task definition configuration {
+task definition family = ""
+infrastructure requirements {
+launch type = [aws fargate, ec2 instance]
+operating system/architecture = linux/x86_64
+network mode = [awsvpc, bridge, default, host, none]
+task size {
+cpu = 1vcpu
+memory = 3gb
+}
+}
+}
+
+service:
+compute configuration:
+compute options:
+capacity provider startegy:
+capacity provider startegy:
+use default:
+capacity provider:
+deployment configuration:
+application type:
+service:
+task definition:
+family: asdf
+revision: latest
+service type:
+replica:
+daemon:
+desired tasks: 1
+deployment failure detection:
+use the amazon ecs deployment circuit breaker
+rollback on failures
