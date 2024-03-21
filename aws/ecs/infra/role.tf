@@ -76,39 +76,69 @@ data "aws_iam_policy_document" "ec2_instance_role_policy" {
     }
   }
 }
-//ecs role
-resource "aws_iam_role" "ecs_service_role" {
+///////////////////
+//ecs role       //
+///////////////////
+resource "aws_iam_role" "ecs_role" {
   name = "ecsServiceRole"
   assume_role_policy = jsonencode({
-    Version = "2012-10-17",
+    Version = "2012-10-17"
     Statement = [
       {
-        Action = "sts:AssumeRole",
-        Effect = "Allow",
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
         Principal = {
-          Service = "ecs.amazonaws.com"
+          Service = "ec2.amazonaws.com"
         }
-      }
+      },
     ]
   })
 }
 
-data "aws_iam_policy_document" "ecs_svc_policy" {
-  statement {
-    actions = [ "sts:AssumeRole" ]
-    effect = "Allow"
+resource "aws_iam_role_policy_attachment" "name" {
+  role = aws_iam_role.ecs_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+}
 
-    principals {
-      type = "Service"
-      identifiers = [ "ecs.amazomaws.com", ]
-    }
-  } 
+
+# data "aws_iam_policy_document" "ecs_svc_policy" {
+#   statement {
+#     actions = [ "sts:AssumeRole" ]
+#     effect = "Allow"
+
+#     principals {
+#       type = "Service"
+#       identifiers = [ "ecs.amazonaws.com", ]
+#     }
+#   } 
+# }
+
+//////////////////
+/// ecs-svc-role//
+//////////////////
+
+resource "aws_iam_role" "ecs_svc_role" {
+  name = "tf_ecsServiceRole"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ecs.amazonaws.com"
+        }
+      },
+    ]
+  })
 }
 
 resource "aws_iam_role_policy" "ecs_service_role_policy" {
   name = "ecs_service_role_policy"
   policy = data.aws_iam_policy_document.ecs_service_role_policy.json
-  role = aws_iam_role.ecs_service_role.id
+  role = aws_iam_role.ecs_svc_role.id
 }
 
 data "aws_iam_policy_document" "ecs_service_role_policy" {

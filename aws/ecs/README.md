@@ -87,3 +87,7 @@ desired tasks: 1
 deployment failure detection:
 use the amazon ecs deployment circuit breaker
 rollback on failures
+
+//
+elb inbound 80, 3333
+rds port

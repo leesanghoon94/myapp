@@ -22,6 +22,12 @@ resource "aws_lb_target_group" "back" {
   protocol = "HTTP"
   vpc_id = aws_vpc.my-vpc.id
   target_type = "instance"
+  
+  health_check {
+    path = "/api/article"
+    port = 3333
+    
+  }
 }
 
 resource "aws_lb_listener" "front" {
@@ -44,6 +50,8 @@ resource "aws_lb_listener" "back" {
     type = "forward"
     target_group_arn = aws_lb_target_group.back.arn
   }
+
+  
 }
 
 
