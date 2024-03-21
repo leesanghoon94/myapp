@@ -13,7 +13,7 @@ jobs:
 
       - name: Build front
         run: |
-          cd aws/eks/game2048
+          cd aws/eks/app-src
           npm install
           npm run build
 
