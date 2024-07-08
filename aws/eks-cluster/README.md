@@ -1,12 +1,16 @@
-│ Error: creating EKS Access Entry (my-cluster:arn:aws:iam::992382792232:role/something): operation error EKS: CreateAccessEntry, https response error StatusCode: 400, RequestID: d8f19198-889c-4c59-91bb-f0a63602fd94, InvalidParameterException: The specified principalArn is invalid: invalid principal.
-│
+# troubleshooting
+
+```console
+Error: creating EKS Access Entry (my-cluster:arn:aws:iam::992382792232:role/something): operation error EKS: CreateAccessEntry, https response error StatusCode: 400, RequestID: d8f19198-889c-4c59-91bb-f0a63602fd94, InvalidParameterException: The specified principalArn is invalid: invalid principal.
+```
+
 │ with module.eks.module.eks.aws_eks_access_entry.this["example"],
 │ on .terraform/modules/eks.eks/main.tf line 191, in resource "aws_eks_access_entry" "this":
 │ 191: resource "aws_eks_access_entry" "this" {
 │
 ╵
 ╷
-│ Error: waiting for EKS Node Group (my-cluster:worker-node-2-20240703173548074600000015) create: unexpected state 'CREATE_FAILED', wanted target 'ACTIVE'. last error: subnet-09adb0ad02df7fc24, subnet-07b76fcba55b4330a: Ec2SubnetInvalidConfiguration: One or more Amazon EC2 Subnets of [subnet-09adb0ad02df7fc24, subnet-07b76fcba55b4330a] for node group worker-node-2-20240703173548074600000015 does not automatically assign public IP addresses to instances launched into it. If you want your instances to be assigned a public IP address, then you need to enable auto-assign public IP address for the subnet. See IP addressing in VPC guide: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
+│ Error: waiting for EKS Node Group (my-cluster:worker-node-2-20240703173548074600000015) create: unexpected state 'CREATE_FAILED', wanted target 'ACTIVE'. last error: subnet-09adb0ad02df7fc24, subnet-07b76fcba55b4330a: Ec2SubnetInvalidConfiguration: One or more Amazon EC2 Subnets of [subnet-09adb0ad02df7fc24, subnet-07b76fcba55b4330a] for node group worker-node-2-20240703173548074600000015 does not automatically assign public IP addresses to instances launched into it. If you want your instances to be assigned a public IP address, then you need to enable auto-assign public IP address for the subnet. See IP addressing in VPC guide: <https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip>
 │
 │ with module.eks.module.eks.module.eks_managed_node_group["worker-node-2"].aws_eks_node_group.this[0],
 │ on .terraform/modules/eks.eks/modules/eks-managed-node-group/main.tf line 385, in resource "aws_eks_node_group" "this":
@@ -14,14 +18,14 @@
 │
 ╵
 ╷
-│ Error: waiting for EKS Node Group (my-cluster:worker-node-1-20240703173548077900000017) create: unexpected state 'CREATE_FAILED', wanted target 'ACTIVE'. last error: subnet-09adb0ad02df7fc24, subnet-07b76fcba55b4330a: Ec2SubnetInvalidConfiguration: One or more Amazon EC2 Subnets of [subnet-09adb0ad02df7fc24, subnet-07b76fcba55b4330a] for node group worker-node-1-20240703173548077900000017 does not automatically assign public IP addresses to instances launched into it. If you want your instances to be assigned a public IP address, then you need to enable auto-assign public IP address for the subnet. See IP addressing in VPC guide: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
+│ Error: waiting for EKS Node Group (my-cluster:worker-node-1-20240703173548077900000017) create: unexpected state 'CREATE_FAILED', wanted target 'ACTIVE'. last error: subnet-09adb0ad02df7fc24, subnet-07b76fcba55b4330a: Ec2SubnetInvalidConfiguration: One or more Amazon EC2 Subnets of [subnet-09adb0ad02df7fc24, subnet-07b76fcba55b4330a] for node group worker-node-1-20240703173548077900000017 does not automatically assign public IP addresses to instances launched into it. If you want your instances to be assigned a public IP address, then you need to enable auto-assign public IP address for the subnet. See IP addressing in VPC guide: <https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip>
 │
 │ with module.eks.module.eks.module.eks_managed_node_group["worker-node-1"].aws_eks_node_group.this[0],
 │ on .terraform/modules/eks.eks/modules/eks-managed-node-group/main.tf line 385, in resource "aws_eks_node_group" "this":
 │ 385: resource "aws_eks_node_group" "this" {
 │
 
-# module.eks.module.eks.aws_eks_access_entry.this["example"] will be created
+module.eks.module.eks.aws_eks_access_entry.this["example"] will be created
 
 - resource "aws_eks_access_entry" "this" {
   - access_entry_arn = (known after apply)
@@ -43,7 +47,7 @@
   - user_name = (known after apply)
     }
 
-# module.eks.module.eks.aws_eks_access_policy_association.this["cluster_creator_admin"] will be created
+module.eks.module.eks.aws_eks_access_policy_association.this["cluster_creator_admin"] will be created
 
 - resource "aws_eks_access_policy_association" "this" {
 
@@ -58,7 +62,7 @@
     }
     }
 
-# module.eks.module.eks.aws_eks_access_policy_association.this["example_example"] will be created
+module.eks.module.eks.aws_eks_access_policy_association.this["example_example"] will be created
 
 - resource "aws_eks_access_policy_association" "this" {
 
@@ -73,9 +77,9 @@
     }
     }
 
-# module.eks.module.vpc.aws_subnet.public[0] will be updated in-place
+module.eks.module.vpc.aws_subnet.public[0] will be updated in-place
 
-instanceprifile
+instanceprofile
 
 {
 "Version": "2012-10-17",
@@ -448,3 +452,190 @@ module "karpenter" {
 }
 
 ```
+
+---
+
+{"level":"ERROR","time":"2024-07-08T13:05:39.947Z","logger":"controller","message":"Reconciler error","commit":"490ef94","controller":"nodeclass.status","controllerGroup":"karpenter.k8s.aws","controllerKind":"EC2NodeClass","EC2NodeClass":{"name":"default"},"namespace":"","name":"default","reconcileID":"56bf5523-7a43-4ffe-a969-3e34f9c70491","error":"creating instance profile, adding role \"arn:aws:iam::992382792232:role/karpenter-eks-node-group-20240708111044279600000003\" to instance profile \"my-cluster*11693340466802365569\", ValidationError: The specified value for roleName is invalid. It must contain only alphanumeric characters and/or the following: +=,.@*-\n\tstatus code: 400, request id: b46d1ab8-2cec-4ee5-9fba-4a10b12875bf"}
+
+teterraform state rm 'module.eks.kubectl_manifest.karpenter_node_class[default]'
+
+╷
+│ Error: Index value required
+│
+│ on line 1:
+│ (source code not available)
+│
+│ Index brackets must contain either a literal number or a literal string.
+╵
+
+````tf state list
+tf state rm "module.eks.kubectl_manifest.karpenter_node_class"```
+
+---
+
+{"level":"ERROR","time":"2024-07-08T14:16:47.483Z","logger":"controller","message":"Reconciler error","commit":"490ef94","controller":"nodeclass.status","controllerGroup":"karpenter.k8s.aws","controllerKind":"EC2NodeClass","EC2NodeClass":{"name":"default"},"namespace":"","name":"default","reconcileID":"f04a4f58-08e4-4de5-8ef4-d9be5ad96116","error":"creating instance profile, adding role \"arn:aws:iam::992382792232:role/KarpenterController-2024070814082964150000000d\" to instance profile \"my-cluster*11693340466802365569\", ValidationError: The specified value for roleName is invalid. It must contain only alphanumeric characters and/or the following: +=,.@*-\n\tstatus code: 400, request id: f0075961-7e8f-41f2-90aa-e068b6094def"}
+
+Karpenter Role names exceeding 64-character limit
+If you use a tool such as AWS CDK to generate your Kubernetes cluster name, when you add Karpenter to your cluster you could end up with a cluster name that is too long to incorporate into your KarpenterNodeRole name (which is limited to 64 characters).
+
+Node role names for Karpenter are created in the form KarpenterNodeRole-${Cluster_Name} in the Create the KarpenterNode IAM Role section of the getting started guide. If a long cluster name causes the Karpenter node role name to exceed 64 characters, creating that object will fail.
+
+Keep in mind that KarpenterNodeRole- is just a recommendation from the getting started guide. Instead of using the eksctl role, you can shorten the name to anything you like, as long as it has the right permissions.
+
+> aws iam list-instance-profiles
+
+````
+
+resource "kubectl_manifest" "karpenter_node_class" {
+yaml_body = <<-YAML
+apiVersion: karpenter.k8s.aws/v1beta1
+kind: EC2NodeClass
+metadata:
+name: default
+spec:
+amiFamily: AL2023
+role: ${module.karpenter.iam_role_name}
+subnetSelectorTerms: - tags:
+karpenter.sh/discovery: ${module.eks.cluster_name}
+securityGroupSelectorTerms: - tags:
+karpenter.sh/discovery: ${module.eks.cluster_name}
+tags:
+karpenter.sh/discovery: ${module.eks.cluster_name}
+YAML
+
+depends_on = [
+helm_release.karpenter
+]
+}
+
+change
+
+- metadata.spec.role: ${module.karpenter.iam_role_arn}
+
+- metadata.spec.role: ${module.karpenter.iam_role_name}
+
+---
+
+{"level":"ERROR","time":"2024-07-08T14:39:32.269Z","logger":"controller","message":"Reconciler error","commit":"490ef94","controller":"nodeclass.status","controllerGroup":"karpenter.k8s.aws","controllerKind":"EC2NodeClass","EC2NodeClass":{"name":"default"},"namespace":"","name":"default","reconcileID":"285af6c9-3e78-451c-8275-bf2420d06fd7","error":"creating instance profile, adding role \"KarpenterController-2024070814082964150000000d\" to instance profile \"my-cluster_11693340466802365569\", AccessDenied: User: arn:aws:sts::992382792232:assumed-role/KarpenterController-2024070814082964150000000d/1720447906074644840 is not authorized to perform: iam:PassRole on resource: arn:aws:iam::992382792232:role/KarpenterController-2024070814082964150000000d because no identity-based policy allows the iam:PassRole action\n\tstatus code: 403, request id: eca9fcd9-5ff6-459e-8b93-f31a99e2ca09"}
+
+`This can be controlled with the variable https://github.com/terraform-aws-modules/terraform-aws-eks/blob/771465be280450fc96d889ef9e15f191bb512849/modules/karpenter/variables.tf#L41C11-L41C31`
+
+---
+
+│
+│ You are creating a plan with the -target option, which means that the result of this plan may not represent all of the changes requested by the current configuration.
+│
+│ The -target option is not for routine use, and is provided only for exceptional situations such as recovering from errors or mistakes, or when Terraform specifically suggests to use it as part of an error message.
+╵
+
+│ Warning: Applied changes may be incomplete
+│
+│ The plan was created with the -target option in effect, so some changes requested in the configuration may have been ignored and the output values may not be fully updated. Run the following command to verify that no
+│ other changes are pending:
+│ terraform plan
+│
+│ Note that the -target option is not suitable for routine use, and is provided only for exceptional situations such as recovering from errors or mistakes, or when Terraform specifically suggests to use it as part of an
+\
+│ Error: cannot re-use a name that is still in use
+│
+│ with module.eks.helm_release.karpenter-crd,
+│ on modules/karpenter.tf line 141, in resource "helm_release" "karpenter-crd":
+│ 141: resource "helm_release" "karpenter-crd" {
+│
+Helm Error when installing the karpenter-crd chart
+Karpenter 0.26.1 introduced the karpenter-crd Helm chart. When installing this chart on your cluster, if you have previously added the Karpenter CRDs to your cluster through the karpenter controller chart or through kubectl replace, Helm will reject the install of the chart due to invalid ownership metadata.
+
+In the case of invalid ownership metadata; label validation error: missing key "app.kubernetes.io/managed-by": must be set to "Helm" run:
+
+Upgrading to 0.37.0+
+Warning
+0.33.0+ only supports Karpenter v1beta1 APIs and will not work with existing Provisioner, AWSNodeTemplate or Machine alpha APIs. Do not upgrade to 0.37.0+ without first upgrading to 0.32.x. This version supports both the alpha and beta APIs, allowing you to migrate all of your existing APIs to beta APIs without experiencing downtime.
+
+---
+
+### Error: could not download chart: public.ecr.aws/karpenter/karpenter:0.32.0: not found
+
+│
+│ with module.eks.helm_release.karpenter,
+│ on modules/karpenter.tf line 22, in resource "helm_release" "karpenter":
+│ 22: resource "helm_release" "karpenter" {
+
+### resolved
+
+<https://gallery.ecr.aws/karpenter/karpenter>
+
+```hcl
+resource "helm_release" "karpenter" {
+  namespace        = "karpenter"
+  create_namespace = true
+
+  name                = "karpenter"
+  repository          = "oci://public.ecr.aws/karpenter"
+  repository_username = data.aws_ecrpublic_authorization_token.token.user_name
+  repository_password = data.aws_ecrpublic_authorization_token.token.password
+  chart               = "karpenter"
+  - version             = "0.32.0"
+  + version             = "v0.32.0"
+
+  set {
+    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = module.karpenter.iam_role_arn
+  }
+  set {
+    name  = "settings.clusterName"
+    value = module.eks.cluster_name
+  }
+  set {
+    name  = "settings.assumRoleARN"
+    value = module.karpenter.node_iam_role_arn
+  }
+}
+
+```
+
+---
+
+### Error: default failed to run apply: error when creating "/var/folders/h0/4s6ycqpn33v4160zt4p2b_ym0000gp/T/144255871kubectl_manifest.yaml": EC2NodeClass.karpenter.k8s.aws "default" is invalid: [spec.amiFamily: Unsupported value: "AL2023": supported values: "AL2", "Bottlerocket", "Ubuntu", "Custom", "Windows2019", "Windows2022", <nil>: Invalid value: "null": some validation rules were not checked because the object was invalid; correct the existing errors to complete validation]
+
+│
+│ with module.eks.kubectl_manifest.karpenter_node_class,
+│ on modules/karpenter.tf line 49, in resource "kubectl_manifest" "karpenter_node_class":
+│ 49: resource "kubectl_manifest" "karpenter_node_class" {
+│
+╵
+
+### resolved
+
+```
+helm valuse.yaml
+v0.32.x
+settings:
+  # -- AWS-specific settings (Deprecated: The AWS block inside of settings was flattened into settings)
+  aws: {}
+
+0.37
+settings:
+- aws: {}
+```
+
+---
+
+### Error: default failed to run apply: error when creating "/var/folders/h0/4s6ycqpn33v4160zt4p2b_ym0000gp/T/713435154kubectl_manifest.yaml": EC2NodeClass.karpenter.k8s.aws "default" is invalid: [spec.amiFamily: Unsupported value: "AL2023": supported values: "AL2", "Bottlerocket", "Ubuntu", "Custom", "Windows2019", "Windows2022", <nil>: Invalid value: "null": some validation rules were not checked because the object was invalid; correct the existing errors to complete validation]
+
+│
+│ with module.eks.kubectl_manifest.karpenter_node_class,
+│ on modules/karpenter.tf line 49, in resource "kubectl_manifest" "karpenter_node_class":
+│ 49: resource "kubectl_manifest" "karpenter_node_class" {
+
+### resolved
+
+v.0.32.x disabled
+
+````yaml
+apiVersion: karpenter.k8s.aws/v1beta1
+kind: EC2NodeClass
+metadata:
+  name: default
+spec:
+  amiFamily: AL2023```
+````
