@@ -1,13 +1,10 @@
 export function create(data) {
-  return fetch(
-    "http://elb-192069193.ap-northeast-2.elb.amazonaws.com:3333/api/article",
-    {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }
-  ).then((resp) => resp.json());
+  return fetch("http://127.0.0.1:3333/api/article", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((resp) => resp.json());
 }

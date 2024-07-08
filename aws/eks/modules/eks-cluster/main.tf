@@ -15,7 +15,7 @@ locals {
 module "eks" {
   # https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest
   source  = "terraform-aws-modules/eks/aws"
-  version = "18.31.0"
+  version = "20.8.4"
 
   # Cluster Name Setting
   cluster_name    = local.cluster_name

@@ -4,10 +4,6 @@ const app = express();
 const db = require("./db");
 const cors = require("cors");
 
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", req.headers.origin);
-//   next();
-// });
 app.use(cors());
 app.use(express.json());
 
