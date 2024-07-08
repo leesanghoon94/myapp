@@ -17,10 +17,14 @@ spec:
         - name: nginx
           image: nginx
           imagePullPolicy: IfNotPresent
-      nodeSelector:
-        nodeType: dev
+      # nodeSelector:
+      #   nodeType: dev
       tolerations:
         - effect: "NoSchedule"
           key: "dev"
           operator: "Equal"
           value: "true"
+        - effect: "NoSchedule"
+          key: "CriticalAddonsOnly"
+          value: "true"
+          operator: "Equal"
