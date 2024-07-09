@@ -6,15 +6,15 @@
 # Optionally download the default ingressclass and ingressclass params
 #wget https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.8.1/v2_8_1_ingclass.yaml
 
-module "iam_assumable_role_with_oidc" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
+
+module "iam_iam-assumable-role-with-oidc" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
+  version = "5.40.0"
 
   create_role                   = true
-  role_name                     = "lb-controller-role"
-  provider_url                  = module.eks.oidc_provider_url
+  role_name                     = "lb-controller"
+  provider_url                  = module.eks.oidc_provider
   oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:aws-load-balancer-controller"]
-
-
 }
 
 
@@ -24,6 +24,8 @@ data "http" "iam_policy" {
 
 resource "aws_iam_role_policy" "lb_controller" {
   name_prefix = "AWSLoadBalancerControllerIAMPolicy"
-  policy      = data.http.iam_policy.body
-  role        = module.iam_assumable_role_alb_controller.iam_role_name
+  policy      = data.http.iam_policy.response_body
+  role        = module.iam_iam-assumable-role-with-oidc.iam_role_name
+
 }
+
