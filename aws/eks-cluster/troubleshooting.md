@@ -706,3 +706,93 @@ Enhancing and renaming components: For v1beta1, APIs have been enhanced to impro
 Provisioner -> NodePool
 Machine -> NodeClaim
 AWSNodeTemplate -> EC2NodeClass
+
+---
+
+{"level":"ERROR","time":"2024-07-08T19:19:38.181Z","logger":"webhook.ConfigMapWebhook","message":"Reconcile error","commit":"3a61217","knative.dev/traceid":"f194468a-89d3-4cf2-8082-6985e4c3984d","knative.dev/key":"validation.webhook.config.karpenter.sh","duration":"69.751µs","error":"secret \"karpenter-cert\" is missing \"ca-cert.pem\" key"}
+{"level":"ERROR","time":"2024-07-08T19:19:38.181Z","logger":"webhook.ValidationWebhook","message":"Reconcile error","commit":"3a61217","knative.dev/traceid":"4d2b02a6-c8b1-43ba-96da-17912d7b1de7","knative.dev/key":"validation.webhook.karpenter.k8s.aws","duration":"125.664µs","error":"secret \"karpenter-cert\" is missing \"ca-cert.pem\" key"}
+{"level":"ERROR","time":"2024-07-08T19:19:38.181Z","logger":"webhook.ValidationWebhook","message":"Reconcile error","commit":"3a61217","knative.dev/traceid":"6bbe7cd0-6c00-43d4-ac9e-d75ee5d9fde1","knative.dev/key":"validation.webhook.karpenter.sh","duration":"76.002µs","error":"secret \"karpenter-cert\" is missing \"ca-cert.pem\" key"}
+{"level":"ERROR","time":"2024-07-08T19:19:38.181Z","logger":"webhook.DefaultingWebhook","message":"Reconcile error","commit":"3a61217","knative.dev/traceid":"13ca80b3-a0fc-4679-9444-4dbaaee9310d","knative.dev/key":"karpenter/karpenter-cert","duration":"45.815µs","error":"secret \"karpenter-cert\" is missing \"ca-cert.pem\" key"}
+{"level":"ERROR","time":"2024-07-08T19:19:38.231Z","logger":"webhook.DefaultingWebhook","message":"Reconcile error","commit":"3a61217","knative.dev/traceid":"acab6de5-e260-4680-947c-c93d9a01abb6","knative.dev/key":"defaulting.webhook.karpenter.k8s.aws","duration":"28.29588ms","error":"failed to update webhook: Operation cannot be fulfilled on mutatingwebhookconfigurations.admissionregistration.k8s.io \"defaulting.webhook.karpenter.k8s.aws\": the object has been modified; please apply your changes to the latest version and try again"}
+{"level":"ERROR","time":"2024-07-08T19:19:38.231Z","logger":"webhook.ValidationWebhook","message":"Reconcile error","commit":"3a61217","knative.dev/traceid":"4bd69548-1ee1-47b7-9c3d-1e5c89a4195d","knative.dev/key":"validation.webhook.karpenter.sh","duration":"28.787496ms","error":"failed to update webhook: Operation cannot be fulfilled on validatingwebhookconfigurations.admissionregistration.k8s.io \"validation.webhook.karpenter.sh\": the object has been modified; please apply your changes to the latest version and try again"}
+{"level":"ERROR","time":"2024-07-08T19:19:38.241Z","logger":"webhook.ConfigMapWebhook","message":"Reconcile error","commit":"3a61217","knative.dev/traceid":"627102bb-e7dd-4fdf-a622-876b275157f4","knative.dev/key":"karpenter/karpenter-cert","duration":"40.256243ms","error":"failed to update webhook: Operation cannot be fulfilled on validatingwebhookconfigurations.admissionregistration.k8s.io \"validation.webhook.config.karpenter.sh\": the object has been modified; please apply your changes to the latest version and try again"}
+{"level":"ERROR","time":"2024-07-08T19:19:38.241Z","logger":"webhook.ValidationWebhook","message":"Reconcile error","commit":"3a61217","knative.dev/traceid":"96d1abfa-31ab-4ae5-a26a-4fbc2fb34546","knative.dev/key":"validation.webhook.karpenter.k8s.aws","duration":"39.250109ms","error":"failed to update webhook: Operation cannot be fulfilled on validatingwebhookconfigurations.admissionregistration.k8s.io \"validation.webhook.karpenter.k8s.aws\": the object has been modified; please apply your changes to the latest version and try again"}
+{"level":"ERROR","time":"2024-07-08T19:19:38.273Z","logger":"webhook.DefaultingWebhook","message":"Reconcile error","commit":"3a61217","knative.dev/traceid":"5ebd2126-8840-4cfc-b1ae-d1a66d85d1c3","knative.dev/key":"karpenter/karpenter-cert","duration":"45.427049ms","error":"failed to update webhook: Operation cannot be fulfilled on mutatingwebhookconfigurations.admissionregistration.k8s.io \"defaulting.webhook.karpenter.k8s.aws\": the object has been modified; please apply your changes to the latest version and try again"}
+
+### resolved
+
+---
+
+### {"level":"DEBUG","time":"2024-07-08T20:00:30.606Z","logger":"controller","message":"loaded log configuration from file \"/etc/karpenter/logging/zap-logger-config\"","commit":"f0eb822"}
+
+{"level":"DEBUG","time":"2024-07-08T20:00:30.606Z","logger":"controller","message":"discovered karpenter version","commit":"f0eb822","version":"v0.32.10"}
+{"level":"FATAL","time":"2024-07-08T20:00:33.196Z","logger":"controller","message":"Checking EC2 API connectivity, AccessDenied: User: arn:aws:sts::992382792232:assumed-role/KarpenterController/1720468833129248622 is not authorized to perform: sts:AssumeRole on resource: arn:aws:iam::992382792232:role/KarpenterController\n\tstatus code: 403, request id: be430fd4-09de-4995-80b2-8919100b912c","commit":"f0eb822"}
+{"level":"DEBUG","time":"2024-07-08T20:00:33.056Z","logger":"controller","message":"loaded log configuration from file \"/etc/karpenter/logging/zap-logger-config\"","commit":"f0eb822"}
+{"level":"DEBUG","time":"2024-07-08T20:00:33.056Z","logger":"controller","message":"discovered karpenter version","commit":"f0eb822","version":"v0.32.10"}
+{"level":"FATAL","time":"2024-07-08T20:00:35.672Z","logger":"controller","message":"Checking EC2 API connectivity, AccessDenied: User: arn:aws:sts::992382792232:assumed-role/KarpenterController/1720468835594565846 is not authorized to perform: sts:AssumeRole on resource: arn:aws:iam::992382792232:role/KarpenterController\n\tstatus code: 403, request id: fcfe7b3d-967c-4908-adc2-f3dde1683b36","commit":"f0eb822"}
+
+### resloved
+
+---
+
+k logs -f -n karpenter -c controller -l app.kubernetes.io/name=karpenter
+{"level":"DEBUG","time":"2024-07-08T21:52:19.574Z","logger":"controller","message":"loaded log configuration from file \"/etc/karpenter/logging/zap-logger-config\"","commit":"f0eb822"}
+{"level":"DEBUG","time":"2024-07-08T21:52:19.574Z","logger":"controller","message":"discovered karpenter version","commit":"f0eb822","version":"v0.32.10"}
+{"level":"FATAL","time":"2024-07-08T21:52:22.275Z","logger":"controller","message":"Checking EC2 API connectivity, AccessDenied: User: arn:aws:sts::992382792232:assumed-role/KarpenterController/eks-my-cluster-karpenter--0e30b9ac-1dbe-4116-9911-543facadc26c is not authorized to perform: sts:TagSession on resource: arn:aws:iam::992382792232:role/karpenter-eks-node-group-20240708212206532800000001\n\tstatus code: 403, request id: a3e5a5eb-53b1-412d-871e-bfd2860c9934","commit":"f0eb822"}
+{"level":"DEBUG","time":"2024-07-08T21:52:18.893Z","logger":"controller","message":"loaded log configuration from file \"/etc/karpenter/logging/zap-logger-config\"","commit":"f0eb822"}
+{"level":"DEBUG","time":"2024-07-08T21:52:18.893Z","logger":"controller","message":"discovered karpenter version","commit":"f0eb822","version":"v0.32.10"}
+{"level":"FATAL","time":"2024-07-08T21:52:21.455Z","logger":"controller","message":"Checking EC2 API connectivity, AccessDenied: User: arn:aws:sts::992382792232:assumed-role/KarpenterController/eks-my-cluster-karpenter--9168faea-f8e2-4d7d-a705-47a332efad08 is not authorized to perform: sts:TagSession on resource: arn:aws:iam::992382792232:role/karpenter-eks-node-group-20240708212206532800000001\n\tstatus code: 403, request id: 788052e7-b96e-48c1-aaca-ae49a39827cf","commit":"f0eb822"}
+
+---
+
+### {"level":"FATAL","time":"2024-07-09T04:41:20.604Z","logger":"controller","message":"Checking EC2 API connectivity, NoCredentialProviders: no valid providers in chain. Deprecated.\n\tFor verbose messaging see aws.Config.CredentialsChainVerboseErrors","commit":"3a61217"}
+
+### resolved
+
+aws.defaultInstanceProfile
+
+---
+
+### Error from server (Invalid): error when creating "karpenter/nodepool.yaml": NodePool.karpenter.sh "default" is invalid: [spec.disruption.consolidationPolicy: Unsupported value: "WhenUnderutilized | WhenEmpty": supported values: "WhenEmpty", "WhenUnderutilized", <nil>: Invalid value: "null": some validation rules were not checked because the object was invalid; correct the existing errors to complete validation]
+
+Error from server (Invalid): error when creating "karpenter/nodepool.yaml": EC2NodeClass.karpenter.k8s.aws "default" is invalid: [spec: Invalid value: "object": must specify exactly one of ['role', 'instanceProfile'], spec.tags: Invalid value: "object": tag contains a restricted tag matching kubernetes.io/cluster/]
+
+### resolved
+
+---
+
+### Warning FailedScheduling 8s default-scheduler 0/2 nodes are available: 2 node(s) didn't match Pod's node affinity/selector. preemption: 0/2 nodes are available: 2 Preemption is not helpful for scheduling. │
+
+│ Warning FailedScheduling 7s karpenter Failed to schedule pod, incompatible with nodepool "default", daemonset overhead={"cpu":"150m","pods":"3"}, no instance type satisfied resources {"cpu":"150m","pods":"4"} and r │
+│ equirements karpenter.k8s.aws/instance-category In [c m r], karpenter.k8s.aws/instance-cpu In [16 32 4 8], karpenter.k8s.aws/instance-generation Exists >2, karpenter.k8s.aws/instance-hypervisor In [nitro], karpenter.sh/capacity-ty │
+│ pe In [on-demand], karpenter.sh/nodepool In [default], kubernetes.io/arch In [amd64 arm64], node.kubernetes.io/instance-type In [t3.large], nodeType In [dev], topology.kubernetes.io/zone In [ap-northeast-2a ap-northeast-2c] (no in │
+│ stance type met all requirements)
+
+### resolved
+
+https://karpenter.sh/v0.37/reference/instance-types/#t3large
+
+---
+
+### {"level":"ERROR","time":"2024-07-09T13:20:50.349Z","logger":"controller","message":"Reconciler error","commit":"490ef94","controller":"nodeclaim.lifecycle","controllerGroup":"karpenter.sh","controllerKind":"NodeClaim","NodeClaim":{"name":"default-2nhnh"},"namespace":"","name":"default-2nhnh","reconcileID":"8265a129-70f5-4568-849f-93192d5db06e","error":"launching nodeclaim, resolving ec2nodeclass, Failed to resolve AMIs"}
+
+knodepool.karpenter.sh/default created
+The EC2NodeClass "default" is invalid:
+
+- spec.amiFamily: Unsupported value: "AL2023_x86_64_STANDARD": supported values: "AL2", "AL2023", "Bottlerocket", "Ubuntu", "Custom", "Windows2019", "Windows2022"
+- <nil>: Invalid value: "null": some validation rules were not checked because the object was invalid; correct the existing errors to complete validation
+
+{"level":"ERROR","time":"2024-07-09T13:26:06.262Z","logger":"controller","message":"Reconciler error","commit":"490ef94","controller":"nodeclaim.lifecycle","controllerGroup":"karpenter.sh","controllerKind":"NodeClaim","NodeClaim":{"name":"default-ws8lm"},"namespace":"","name":"default-ws8lm","reconcileID":"0769afa5-9de9-41e0-b83d-71da985aa801","error":"launching nodeclaim, resolving ec2nodeclass, Failed to resolve AMIs"}
+
+### resolved
+
+```amiSelectorTerms:
+    # Select on any AMI that has both the "karpenter.sh/discovery: ${CLUSTER_NAME}" tag
+    # AND the "environment: test" tag OR any AMI with the "my-ami" name
+    # OR any AMI with ID "ami-123"
+    - tags:
+        karpenter.sh/discovery: "my-cluster"
+        environment: test
+     - name: my-ami
+     - id: ami-123
+```

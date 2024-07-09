@@ -17,8 +17,8 @@ spec:
         - name: nginx
           image: nginx
           imagePullPolicy: IfNotPresent
-      # nodeSelector:
-      #   nodeType: dev
+      nodeSelector:
+        nodeType: dev
       tolerations:
         - effect: "NoSchedule"
           key: "dev"
