@@ -796,3 +796,8 @@ The EC2NodeClass "default" is invalid:
      - name: my-ami
      - id: ami-123
 ```
+
+### loadbalancer pening
+
+kubernetes.io/role/internal-elb =1
+태그 안걸렸음

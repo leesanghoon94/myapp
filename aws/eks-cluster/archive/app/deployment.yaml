@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: 696095669552.dkr.ecr.ap-northeast-2.amazonaws.com/frontend:latest
+          image: <frontend:latest>
           ports:
             - containerPort: 80
 ---
@@ -40,6 +40,6 @@ spec:
     spec:
       containers:
         - name: server
-          image: 696095669552.dkr.ecr.ap-northeast-2.amazonaws.com/server:latest
+          image: <server:latest>
           ports:
             - containerPort: 3333
