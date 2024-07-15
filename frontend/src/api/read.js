@@ -1,13 +1,15 @@
 export function readAll() {
   return () =>
-    fetch(`http://127.0.0.1:3333/api/article/`)
+    fetch(
+      `http://alb-controller-1582272261.ap-northeast-2.elb.amazonaws.com/api/article/`
+    )
       .then((res) => res.json())
       .then((arr) => arr.reverse());
 }
 
 export function readOne(id) {
   return () =>
-    fetch(`http://127.0.0.1:3333/api/article/${id}`).then((resp) =>
-      resp.json()
-    );
+    fetch(
+      `http://alb-controller-1582272261.ap-northeast-2.elb.amazonaws.com/api/article/${id}`
+    ).then((resp) => resp.json());
 }
