@@ -27,7 +27,7 @@ module "vpc" {
   tags = {
     "kubernetes.io/cluster/${var.cluster_name}"  = "shared"
     "karpenter.sh/discovery/${var.cluster_name}" = "1"
-    Terraform                                    = "true"
+
   }
 }
 

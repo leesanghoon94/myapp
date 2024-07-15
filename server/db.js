@@ -1,8 +1,8 @@
 const mysql = require("mysql2");
 
 const db = mysql.createConnection({
-  host: "mysql",
-  user: "root",
+  host: "database-2.cx0ao0u6e4ia.ap-northeast-2.rds.amazonaws.com",
+  user: "admin",
   port: "3306",
   database: "article1",
   password: "12345678",
@@ -10,8 +10,8 @@ const db = mysql.createConnection({
 
 function handleDisconnect() {
   connection = mysql.createConnection({
-    host: "mysql",
-    user: "root",
+    host: "database-2.cx0ao0u6e4ia.ap-northeast-2.rds.amazonaws.com",
+    user: "admin",
     password: "12345678",
     database: "article1",
   });
