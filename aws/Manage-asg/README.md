@@ -1,6 +1,6 @@
-# Manage AWS Auto Scaling Groups
+# AWS Auto Scaling Groups 관리
 
-### Prerequisites
+### 전제 조건
 
 - terraform v1.1+ installed
 - aws 계정 && awscliv2
@@ -11,16 +11,11 @@
 - 조정 정책을 정의
 - ASG의 원치 않는 확장을 방지하기 위해 수명 주기 인수를 사용하는 방법
 
-### 수명주기규칙설정
+---
 
-Terraform이 구성의 다른 측면을 변경할 때 인스턴스가 확장,축소되지 않도록 하려면 수명 주기 인수를 사용하여 원하는 용량 및 대상 그룹에 대한 변경 사항을 무시하세요.  
-예를들어
+### 수명 주기 인수를 사용하는 방법
 
 ```console
-
-Terraform will perform the following actions:
-
-  # aws_autoscaling_group.asg will be updated in-place
   ~ resource "aws_autoscaling_group" "asg" {
       ~ desired_capacity                 = 2 -> 1
         id                               = "asg"
@@ -33,8 +28,9 @@ Terraform will perform the following actions:
 Plan: 0 to add, 1 to change, 0 to destroy.
 ```
 
-Terraform plan 에서 인스턴스를 다시 1로 축소할 것을 제안합니다  
-Terraform이 구성의 다른 측면을 변경할 때 인스턴스가 확장되지 않도록 하려면 수명 주기 인수를 사용하여 원하는 용량 및 대상 그룹에 대한 변경 사항을 무시하세요.
+리소스의 다른 인수를 변경시 테라폼 플랜을 하면 인스턴스를 다시 1로 축소할 것을 제안한다.  
+왜냐면 테라폼을 init 하게되면 terraform.lock.hcl 파일이 생기는데 terraform.lock.hcl 파일의 해시값을 비교하여 사용하는 모듈과 제공자의 버전이 일관되게 유지하려고하기때문이다.  
+Terraform이 구성의 다른 측면을 변경할 때 인스턴스가 확장되지 않도록 하려면 수명 주기 인수를 사용하여 무시해준다.
 
 ```hcl
 resource "aws_autoscaling_group" "asg" {
@@ -51,7 +47,8 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type = "ELB"
 
 
-리소스 블록 에 다음 코드를 추가합니다
+# 라이프사이클 추가
+# desired_capacity 및 target_group_arns
 
   lifecycle {
       ignore_changes = [desired_capacity, target_group_arns]
@@ -59,11 +56,20 @@ resource "aws_autoscaling_group" "asg" {
 }
 ```
 
-### 확장 정책 추가
+---
+
+### 오토스케일러 정책 추가
 
 ASG의 인스턴스 수를 수동으로 확장 할 수 있지만 cloudwatch 지표 경보에 따라 자동 조정할 수 있습니다.
 
-    aws autoscaling set-desired-capacity --auto-scaling-group-name $(terraform output -raw asg_name) --desired-capacity 2
+- 향상된 내결함성.
+- 가용성 향상.
+- 비용 관리 향상.
+
+```console
+# awscli를 사용하여 용량 설정 하는법
+  aws autoscaling set-desired-capacity --auto-scaling-group-name $(terraform output -raw asg_name) --desired-capacity 2
+```
 
 자동 조정 정책 및 Cloud Watch 지표 경보에 대한 다음 구성
 
@@ -140,7 +146,7 @@ resource "aws_autoscaling_policy" "scale_up" {
 
 ---
 
-## 부하테스트
+### 부하테스트
 
 ```console
 amazon-linux-extra install -y epel

@@ -1,13 +1,13 @@
 resource "aws_vpc" "my-vpc" {
   cidr_block = "10.1.0.0/16"
   tags = {
-    "Name" = "my-vpc" 
+    "Name" = "my-vpc"
   }
 }
 
 resource "aws_subnet" "my-public-subnet-a" {
-  vpc_id     = aws_vpc.my-vpc.id
-  cidr_block = "10.1.1.0/26"
+  vpc_id            = aws_vpc.my-vpc.id
+  cidr_block        = "10.1.1.0/26"
   availability_zone = "ap-northeast-2a"
 
   tags = {
@@ -15,8 +15,8 @@ resource "aws_subnet" "my-public-subnet-a" {
   }
 }
 resource "aws_subnet" "my-public-subnet-c" {
-  vpc_id     = aws_vpc.my-vpc.id
-  cidr_block = "10.1.1.64/26"
+  vpc_id            = aws_vpc.my-vpc.id
+  cidr_block        = "10.1.1.64/26"
   availability_zone = "ap-northeast-2c"
 
   tags = {
@@ -25,8 +25,8 @@ resource "aws_subnet" "my-public-subnet-c" {
 }
 
 resource "aws_subnet" "my-private-subnet-app-a" {
-  vpc_id = aws_vpc.my-vpc.id
-  cidr_block = "10.1.1.128/27"
+  vpc_id            = aws_vpc.my-vpc.id
+  cidr_block        = "10.1.1.128/27"
   availability_zone = "ap-northeast-2a"
 
   tags = {
@@ -34,8 +34,8 @@ resource "aws_subnet" "my-private-subnet-app-a" {
   }
 }
 resource "aws_subnet" "my-private-subnet-app-c" {
-  vpc_id = aws_vpc.my-vpc.id
-  cidr_block = "10.1.1.160/27"
+  vpc_id            = aws_vpc.my-vpc.id
+  cidr_block        = "10.1.1.160/27"
   availability_zone = "ap-northeast-2c"
 
   tags = {
@@ -44,8 +44,8 @@ resource "aws_subnet" "my-private-subnet-app-c" {
 }
 
 resource "aws_subnet" "my-private-subnet-db-a" {
-  vpc_id = aws_vpc.my-vpc.id
-  cidr_block = "10.1.1.192/27"
+  vpc_id            = aws_vpc.my-vpc.id
+  cidr_block        = "10.1.1.192/27"
   availability_zone = "ap-northeast-2a"
 
   tags = {
@@ -55,8 +55,8 @@ resource "aws_subnet" "my-private-subnet-db-a" {
 
 
 resource "aws_subnet" "my_private_subnet_db_c" {
-  vpc_id = aws_vpc.my-vpc.id
-  cidr_block = "10.1.1.224/27"
+  vpc_id            = aws_vpc.my-vpc.id
+  cidr_block        = "10.1.1.224/27"
   availability_zone = "ap-northeast-2c"
 
   tags = {
@@ -122,10 +122,10 @@ resource "aws_nat_gateway" "natgw" {
 }
 
 resource "aws_eip" "elb" {
-  
-  domain   = "vpc"
 
-  depends_on = [ aws_internet_gateway.igw ]
+  domain = "vpc"
+
+  depends_on = [aws_internet_gateway.igw]
 }
 
 resource "aws_route_table_association" "public-a" {
@@ -157,6 +157,7 @@ resource "aws_route_table_association" "private_db_c" {
   route_table_id = aws_route_table.private-route.id
 }
 
+# vpc 모듈
 
 # module "vpc" {
 #   source = "terraform-aws-modules/vpc/aws"
@@ -170,6 +171,7 @@ resource "aws_route_table_association" "private_db_c" {
 
 #   enable_nat_gateway = true
 #   enable_vpn_gateway = true
+#   single_nat_gateway  = true
 
 #   tags = {
 #     Terraform = "true"
