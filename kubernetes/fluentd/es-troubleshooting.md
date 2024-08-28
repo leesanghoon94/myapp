@@ -155,7 +155,4 @@ curl --cacert ./config/certs/http_ca.crt -u elastic:$ELASTIC_PASSWORD -X GET "ht
   "text":  "Is this déjà vu?"
 }
 '
-
-
-
 ```

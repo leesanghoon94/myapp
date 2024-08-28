@@ -63,9 +63,11 @@ Fluentd sometimes uses predictable paths for dumping, writing files, and so on. 
 
 For symlink attack protection, check the following parameters are set to 1:
 
-Copy
+```
 fs.protected_hardlinks = 1
 fs.protected_symlinks = 1
+```
+
 This settings are almost enough for time-of-check to time-of-use (TOCTOU, TOCTTOU or TOC/TOU) which are a class of software bugs.
 
 If you turned off these protections, please turn them on.
