@@ -16,9 +16,5 @@ resource "aws_iam_role" "s3_role" {
       },
     ]
   })
-
-  tags = {
-    tag-key = "tag-s3_role"
-  }
 }
 

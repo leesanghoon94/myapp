@@ -4,15 +4,12 @@
 
 테라폼으로 vpc 생성하기
 
-## 사용법
+### 사용법
 
-```
-cd tf/
-tfi
-tfp
-tfa -auto-approve
-```
+    tfi
+    tfp
+    tfa -auto-approve
 
-## clean up
+### 정리
 
     tfd -auto-approve
