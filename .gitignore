@@ -238,4 +238,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+#idea
+.idea
 # End of https://www.toptal.com/developers/gitignore/api/terraform,macos,node,react,git

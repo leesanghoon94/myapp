@@ -1,6 +1,8 @@
-# name: automerge
-# on:
-#   pull_request:
+ name: automerge
+ on:
+   workflow_dispatch: # 수동 실행만 가능하도록 변경
+
+ #   pull_request:
 #     branches:
 #       - main
 #     types:

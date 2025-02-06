@@ -1,7 +1,9 @@
-# name: Build For game-2048
+ name: Build For game-2048
 
-# on:
-#   push:
+ on:
+   workflow_dispatch: # 수동 실행만 가능하도록 변경
+
+ #   push:
 #     branches: [main]
 
 # jobs:
