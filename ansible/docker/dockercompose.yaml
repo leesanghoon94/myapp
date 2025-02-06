@@ -4,9 +4,6 @@ services:
   ubuntu1:
     image: ubuntu:latest
     container_name: ubuntu1
-    networks:
-      custom_network:
-        ipv4_address: 192.168.1.101
     privileged: true
     entrypoint: ["/bin/bash" ,"-c", "apt-get update && apt-get install openssh-server vim -y && tail -f /dev/null"]
     ports:
@@ -15,17 +12,7 @@ services:
   ubuntu2:
     image: ubuntu:latest
     container_name: ubuntu2
-    networks:
-      custom_network:
-        ipv4_address: 192.168.1.102
     privileged: true
     entrypoint: ["/bin/bash" ,"-c", "apt-get update && apt-get install openssh-server -y && tail -f /dev/null"]
     ports:
       - "2222:22"
-
-networks:
-  custom_network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.1.0/24

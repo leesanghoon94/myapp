@@ -20,3 +20,4 @@ ubuntu 2개는 ansible-node 이고 로컬에서 ansible로 ssh 통신할 예정
 [ansible vault](./examples/ansible_vault)  
 [ansible 멱등성](./examples/ansible_idempotent)  
 [ansible mysql collection 예제](./examples/ansible_idempotent)
+[ansible semaphroe 예제](./examples/ansible_semaphroe)
