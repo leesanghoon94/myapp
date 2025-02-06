@@ -28,7 +28,7 @@ resource "aws_subnet" "private_1" {
   cidr_block        = "10.0.3.0/24"
   availability_zone = "ap-northeast-2a"
   tags = {
-    "Naem" = "private-subnet"
+    "Name" = "private-subnet"
   }
 }
 
@@ -37,6 +37,6 @@ resource "aws_subnet" "private_2" {
   cidr_block        = "10.0.4.0/24"
   availability_zone = "ap-northeast-2c"
   tags = {
-    "Naem" = "private-subnet"
+    "Name" = "private-subnet"
   }
 }

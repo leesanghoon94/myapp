@@ -13,7 +13,7 @@ async function fetchMetadata() {
     await admin.disconnect();
 }
 
-fetchMetadata().catch(error => console.log(error));
+// fetchMetadata().catch(error => console.log(error));
 
 
 ///------------------------//
@@ -24,7 +24,7 @@ async function send(){
     await producer.connect();
     await producer.send({
         topic: 'test-topic',
-        messages: [{ value: 'Hello World!' }],
+        messages: [{ value: 'Hello World! kafka!!' }],
     });
 
     await producer.disconnect();
@@ -34,18 +34,28 @@ async function send(){
 send().catch(error => console.log(error));
 
 
-const test = kafka.consumer({ groupId: 'my-group' });
-await test.connect();
-await test.subscribe({ topic: 'test-topic', fromBeginning: true });
-await test.run({
-    eachMessage: async ({ topic, partition, message }) => {
-        console.log({
-            value: message.value.toString(),
-        })
-    }
-})
-test.run({
-    eachMessage: async ({ topic, partition, message }) => {
-        console.log(`Received message: ${message.value.toString()}`);
-    }
-});
+const consumer = kafka.consumer({ groupId: 'my-group' });
+
+async function consume(){
+    await consumer.connect();
+    await consumer.subscribe({ topic: 'test-topic', fromBeginning: true });
+
+    // await consumer.run({
+    //     eachMessage: async ({ topic, partition, message }) => {
+    //         console.log({
+    //             value: message.value.toString(),
+    //         })
+    //     }
+    // })
+
+    await consumer.run({
+        eachMessage: async ({ topic, partition, message }) => {
+            console.log(`Received message: ${message.value.toString()}`);
+        }
+    });
+
+
+
+}
+
+consume().catch(error => console.log(error))
