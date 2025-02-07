@@ -10,7 +10,7 @@
       ansible.builtin.command:
         cmd: "ls /tmp/doest_not_exist"
 #       실패를 무시하려면 주석을 해제하세요
-      ignore_errors: yes
+#      ignore_errors: yes
 
     - name: Echo end
       ansible.builtin.debug:

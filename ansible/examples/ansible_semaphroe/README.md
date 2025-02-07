@@ -3,7 +3,7 @@
 
 # 실행 방법
 
-```sh
+```zsh
 docker-compose up -d
 ✔ Container semaphroe-mysql-1      Started
 ✔ Container ansible-node1          Started
